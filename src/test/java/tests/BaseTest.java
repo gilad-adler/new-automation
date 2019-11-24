@@ -29,8 +29,13 @@ public class BaseTest {
 
     protected WebDriver startChrome() {
         String chromedriverExeName = "78-chromedriver.exe";
-        String webdriverPath =  "C:\\dev\\test-automation-9-0-saas\\jsystem\\tests\\resources\\utilities\\webdriver\\" + chromedriverExeName;
-        System.setProperty("webdriver.chrome.driver", webdriverPath);
+        try {
+            String webdriverPath =  new java.io.File( "." ).getCanonicalPath() + "\\src\\test\\java\\resources\\webdriver\\" + chromedriverExeName;
+            System.setProperty("webdriver.chrome.driver", webdriverPath);
+        } catch (Exception e){
+            System.out.println("Failed to get webdriver.chrome.driver fodler");
+        }
+
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
