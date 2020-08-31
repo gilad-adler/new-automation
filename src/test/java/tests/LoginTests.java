@@ -20,7 +20,8 @@ public class LoginTests extends BaseTest {
 
     @After
     public void tierdown(){
-        driver.quit();
+        if (driver != null)
+            driver.quit();
     }
 
     @Before
