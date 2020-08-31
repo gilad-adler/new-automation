@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.Listeners.TestListener;
@@ -29,6 +30,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
+    @Category(tests.LoginTests.class)
     @Description("Test Description: Login As Admin and click Users Tab ")
     public void loginAsAdmin () throws Exception{
         LoginPage login = new LoginPage(getDriver());
@@ -41,16 +43,6 @@ public class LoginTests extends BaseTest {
         login.logout();
     }
 
-    @Test
-    @Severity(SeverityLevel.BLOCKER)
-    @Description("Test Description: try to get invalid setting tab.")
-    public void failNavigate () throws Exception{
-        LoginPage login = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
-        homePage.open();
-        login.login(username,password);
-        homePage.navigateToSetting("xxx");
-    }
 
 
 }
