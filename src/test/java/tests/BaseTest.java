@@ -28,7 +28,7 @@ public class BaseTest {
 
 
     protected WebDriver startChrome() {
-        String chromedriverExeName = "78-chromedriver.exe";
+        String chromedriverExeName = "chromedriver.exe";
         try {
             String webdriverPath =  new java.io.File( "." ).getCanonicalPath() + "\\src\\test\\java\\resources\\webdriver\\" + chromedriverExeName;
             System.setProperty("webdriver.chrome.driver", webdriverPath);

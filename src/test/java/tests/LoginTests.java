@@ -1,17 +1,15 @@
 package tests;
 
 import io.qameta.allure.*;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.Listeners.TestListener;
+import utils.ScreenshotUtils;
 
-//In order to eliminate attachment problem for Allure, you should add @Listener line.
-//link: https://github.com/allure-framework/allure1/issues/730
-@Listeners({ TestListener.class })
-@Epic("Regression Tests")
 @Feature("Login Tests")
 public class LoginTests extends BaseTest {
 
@@ -19,26 +17,31 @@ public class LoginTests extends BaseTest {
     String username = "Administrator";
     String password = "Q!w2e3r4";
 
+    @After
+    public void tierdown(){
+        driver.quit();
+    }
 
-
-    @BeforeClass
+    @Before
     public void setup(){
         driver = startChrome();
     }
 
-    @Test (priority = 0, description="Correct Login")
+    @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Description("Test Description: Login As Admin.")
+    @Description("Test Description: Login As Admin and click Users Tab ")
     public void loginAsAdmin () throws Exception{
         LoginPage login = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         login.login(username,password);
         homePage.navigateToSetting("Users");
+        Thread.sleep(5 * 1000);
+        ScreenshotUtils.screenshot(driver);
         login.logout();
     }
 
-    @Test (priority = 0, description="Fail setting navigation")
+    @Test
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test Description: try to get invalid setting tab.")
     public void failNavigate () throws Exception{
