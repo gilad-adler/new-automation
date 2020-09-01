@@ -72,7 +72,7 @@
                         </property>
                         <property>
                             <name>allure.results.directory</name>
-                            <value>${basedir}/allure-results</value>
+                            <value>${basedir}/target/allure-results</value>
                         </property>
                     </properties>
                 </configuration>
@@ -89,8 +89,8 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.9</version>
                 <configuration>
-                    <resultsDirectory>${basedir}/allure-results</resultsDirectory>
-                    <reportDirectory>${basedir}/allure-reports</reportDirectory>
+                    <resultsDirectory>${basedir}/target/allure-results</resultsDirectory>
+                    <reportDirectory>${basedir}/target/allure-reports</reportDirectory>
                     <!--<reportingOutputDirectory>${basedir}/target/allure-reportsssss</reportingOutputDirectory>-->
                 </configuration>
             </plugin>
