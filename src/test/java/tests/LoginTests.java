@@ -2,13 +2,11 @@ package tests;
 
 import io.qameta.allure.*;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import pages.HomePage;
 import pages.LoginPage;
-//import utils.Listeners.TestListener;
 import utils.ScreenshotUtils;
 
 @Feature("Login Tests")
