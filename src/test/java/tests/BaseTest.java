@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,10 +8,6 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.TestException;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import pages.HomePage;
 
 import java.util.Arrays;
@@ -72,7 +69,7 @@ public class BaseTest {
         WebDriver driver = new ChromeDriver(capabilities);
         return driver;
     }
-    @AfterClass
+    @After
     public void teardown() {
         driver.quit();
     }

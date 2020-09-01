@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import pages.HomePage;
 import pages.LoginPage;
-import utils.Listeners.TestListener;
+//import utils.Listeners.TestListener;
 import utils.ScreenshotUtils;
 
 @Feature("Login Tests")
@@ -39,7 +39,7 @@ public class LoginTests extends BaseTest {
         homePage.open();
         login.login(username,password);
         homePage.navigateToSetting("Users");
-        Thread.sleep(5 * 1000);
+        Thread.sleep(1 * 1000);
         ScreenshotUtils.screenshot(driver);
         login.logout();
     }

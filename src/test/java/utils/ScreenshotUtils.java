@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class ScreenshotUtils {
-    @Attachment(type = "image/png")
+
+
+    @Attachment(value = "screenshot", type = "image/png")
     public static byte[] screenshot(WebDriver driver)/* throws IOException */ {
         try {
             File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
