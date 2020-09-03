@@ -9,6 +9,7 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.HomePage;
+import utilities.CMUtil;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,7 +18,10 @@ import java.util.logging.Level;
 
 public class BaseTest {
     public WebDriver driver;
+    String configName = "auto-utest-sanity-224-156";
 
+    String username = CMUtil.getValueFromSut("management.adminUser", configName);
+    String password = CMUtil.getValueFromSut("management.adminUserPassword", configName);
 
     public WebDriver getDriver() {
         return driver;

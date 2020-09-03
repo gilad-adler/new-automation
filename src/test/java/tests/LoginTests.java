@@ -7,14 +7,11 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import pages.HomePage;
 import pages.LoginPage;
+import utilities.CMUtil;
 import utils.ScreenshotUtils;
 
 @Feature("Login Tests")
 public class LoginTests extends BaseTest {
-
-    //Test Data
-    String username = "Administrator";
-    String password = "Q!w2e3r4";
 
     @After
     public void tierdown(){
@@ -41,7 +38,6 @@ public class LoginTests extends BaseTest {
         ScreenshotUtils.screenshot(driver);
         login.logout();
     }
-
 
 
 }
