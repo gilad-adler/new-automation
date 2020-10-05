@@ -1,23 +1,17 @@
 package pages;
 
+import com.google.common.io.Files;
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
+import java.io.File;
+import java.io.IOException;
 
 public class BasePage {
-    public WebDriver driver;
+    public static WebDriver driver;
     public WebDriverWait wait;
 
     //Constructor
@@ -30,7 +24,55 @@ public class BasePage {
         return driver;
     }
 
+    
+    @Attachment(value = "{0}", type = "image/png")
+    public static byte[] takeScreenshot( String linkMessage)/* throws IOException */ {
+        try {
+            File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            return Files.toByteArray(screen);
+        } catch (IOException e) {
+            return null;
+        }
+    }
 
+    public void selectCmpFromDropDown(String provider, String optionToSelect) {
+        String selectXpath = "//select-cmp[@provider='" + provider + "']";
+        if (driver.findElements(By.xpath(selectXpath)).size() > 0) {
+            WebElement selectCmp = driver.findElement(By.xpath(selectXpath));
+            selectCmp.click();
+            selectCmpField(selectXpath, optionToSelect);
+        }
+    }
+    public void selectCmpField(String selectCmpProviderXpath, String optionToSelect ) {
+        String selectItem = selectCmpProviderXpath + "//label[contains(@ng-repeat,'item in $ctrl.provider.getItems()') and contains(text(),'" + optionToSelect + "')]";
+        if (driver.findElements(By.xpath(selectItem)).size() > 0) {
+            driver.findElement(By.xpath(selectItem)).click();
+        } 
+    }
+
+    public static void clickByJS(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    
+    protected void pause(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ignored) { }
+    }
+    /**
+     * Use this method to check whether AngularJS error exists over Page by @ng-bind='error'
+     */
+    protected boolean isFreeFromAngularJSErrors() {
+        try {
+            Thread.sleep(1000);
+            //found an error on screen
+            return !driver.findElement(By.xpath("//span[@ng-bind='error']")).isDisplayed();
+        } catch (Exception e) {
+            return true;
+        }
+    }
+    
     public void typeEditBox(String editBoxName, String textToType) {
         String xpath = "//input[@name='" + editBoxName + "' or " +
                 "@title='" + editBoxName + "' or " +
@@ -108,5 +150,9 @@ public class BasePage {
         } catch (TimeoutException e) {
         }
         return null;
+    }
+
+    public boolean textExistsOnScreen(String expectedText){
+        return driver.getPageSource().contains(expectedText);
     }
 }

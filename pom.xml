@@ -10,7 +10,8 @@
 
     <properties>
         <aspectj.version>1.9.6</aspectj.version>
-        <allure.version>1.5.4</allure.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -32,12 +33,10 @@
             <version>${aspectj.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-junit-adaptor -->
         <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-junit-adaptor</artifactId>
-            <version>${allure.version}</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>2.13.5</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
@@ -52,14 +51,6 @@
             <artifactId>json-path</artifactId>
             <version>3.3.0</version>
         </dependency>
-
-
-
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4</artifactId>
-            <version>2.13.1</version>
-        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -70,6 +61,18 @@
             <artifactId>rest-assured</artifactId>
             <version>2.9.0</version>
             <scope>compile</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.2</version>
         </dependency>
 
     </dependencies>
@@ -88,7 +91,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>ru.yandex.qatools.allure.junit.AllureRunListener</value>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
                         </property>
                         <property>
                             <name>allure.results.directory</name>
@@ -109,19 +112,11 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.9</version>
                 <configuration>
-                    <resultsDirectory>${basedir}/target/allure-results</resultsDirectory>
+                    <resultsDirectory>${basedir}/allure-results</resultsDirectory>
                     <reportDirectory>${basedir}/target/allure-reports</reportDirectory>
-                    <!--<reportingOutputDirectory>${basedir}/target/allure-reportsssss</reportingOutputDirectory>-->
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+
         </plugins>
     </build>
 </project>

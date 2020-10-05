@@ -1,10 +1,11 @@
 package pages;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.qatools.allure.annotations.Step;
+
 
 public class HomePage extends BasePage {
 
@@ -14,11 +15,10 @@ public class HomePage extends BasePage {
     }
 
     /**Variables*/
-    String baseURL = "http://10.77.224.156/login/";
     private final String SETTING_MENU_XPATH = "//div[@id='highlight-menu-settings']";
 
     @Step("Open Aternity Webapp")
-    public HomePage open() {
+    public HomePage open(String baseURL) {
         driver.get(baseURL);
         return this;
     }

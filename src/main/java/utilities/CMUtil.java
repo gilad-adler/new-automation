@@ -1,6 +1,5 @@
 package utilities;
 
-import TestData.NameValueTD;
 import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 
@@ -29,9 +28,4 @@ public class CMUtil {
         return JsonPath.from(configurationStr).getString(path);
     }
 
-    public static NameValueTD getManagementAdmin(String configName) {
-        final String adminUser = getValueFromSut("management.adminUser",configName);
-        final String adminUserPassword = getValueFromSut("management.adminUserPassword",configName);
-        return new NameValueTD(adminUser, adminUserPassword);
-    }
 }
